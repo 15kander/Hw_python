@@ -564,3 +564,241 @@ print(user2)
 # N81:
 squares = [i**2 for i in range(1,21)]
 print(squares)
+
+# N82:
+even_nums = [i for i in range(1,31) if i%2==0]
+print(even_nums)
+
+# N83:
+strs = ['python', 'JavaScript', 'code', 'list']
+lengths = [len(wrd) for wrd in strs]
+print(lengths)
+
+# N84:
+words = ["python", "a", "code", "informatics", "list"]
+sorted_wrds = sorted(words, key=lambda word:len(word))
+print(sorted_wrds)
+
+# N85:
+numbers = [1, 5, 2, 17, 32, 6, 4]
+new_list = list(map(lambda i: i**2, numbers))
+print(new_list)
+
+# N86:
+lst_num = [-1, 5, 23, -45, 77, 63, -10, 3, 2010]
+positive_lst = list(filter(lambda x: x>0, lst_num))
+print(positive_lst)
+
+# N87:
+words_list = ['Jackson', "Joshua","Olise","Harry","Upamecano"]
+print(list(i for i in words_list if len(i)>5))
+
+# N88:
+str_nums = ['1','2','3','4','5']
+print(list(int(i) for i in str_nums))
+
+# N89:
+people = [ {'name':'Alice', 'age': 30}, {'name': 'Bob', 'age': 25}, {'name': 'Charlie', 'age': 35} ]
+sorted_list = sorted(people, key=lambda x: x['age'])
+print(sorted_list )
+
+# N90:
+people_list = [
+    {"name":"Isko", "age":16},
+    {"name":"Alisher", "age":17},
+    {"name":"Alex", "age":14},
+    {"name":"Durdana", "age":22},
+    {"name":"David", "age":18},
+    {"name":"Harry", "age":16},
+    {"name":"Olise", "age":19}
+]
+adult_list = list(filter(lambda x: x["age"]>18, people_list))
+print(list(i['name'] for i in adult_list))
+
+# N91:
+class User:
+    def __init__(self, name, age) :
+        self.name = name
+        self.age = age
+    def show_info(self):
+        return f"Name: {self.name}  Age: {self.age}"
+alex = User('Alex',25)
+print(alex.show_info())
+
+# N92:
+class Car:
+    def __init__(self, brand, model, year):
+        self.brand = brand
+        self.model = model
+        self.year = year
+    def show_info(self):
+        return f"Brand: {self.brand}  Model: {self.model}  Year: {self.year}"
+camry = Car("Toyota", "Camry 3.5", 2009)
+print(camry.show_info())
+
+# N93:
+class BankAccount:
+    def __init__(self, owner: str, balance: float = 0.0):
+        self.owner = owner
+        self.balance = balance
+
+    def deposit(self, amount:float)->float:
+        if amount <= 0 :
+            raise ValueError("Deposit amount must be greater than zero")
+
+        self.balance += amount
+        print(f"Deposited ${amount:.2f}  |  Current balance: ${self.balance:.2f}")
+        return self.balance
+
+    def withdraw(self, amount: float)->float:
+        if amount <=0:
+            raise ValueError("Withdrawal amount must be greater than zero.")
+        if amount > self.balance:
+            raise ValueError(f"Insufficient funds! Available balance: ${self.balance:.2f}")
+        self.balance -= amount
+        print(f"Withdrew ${amount:.2f}  |  Remaining balance: ${self.balance:.2f}")
+        return self.balance
+
+    def get_balance(self) -> float:
+        return self.balance
+
+    def __str__(self) -> str:
+        return f"Account Owner: {self.owner} | Balance: ${self.balance:.2f}"
+
+account = BankAccount("John Doe", 1000.0)
+account.deposit(500)    
+account.withdraw(300)  
+try:
+    account.withdraw(2000)
+except ValueError as e:
+    print(f"Error: {e}")
+
+# N94:
+class Product:
+    def __init__(self, name:str, price:float, quantity:int):
+        self.name = name
+        self.price = price
+        self.quant = quantity
+    def show_info(self):
+        return f"\nName: {self.name}\nPrice: {self.price}\nQuantity: {self.quant}\n"
+laptop = Product('Laptop', 79.00, 200)
+print(laptop.show_info())
+
+# N95:
+class Employee:
+    def __init__(self,name:str, salary:float):
+        self.name = name
+        self.salary = salary
+
+    def get_annual_salary(self)->float:
+        return self.salary * 12
+
+    def show_info(self):
+        return f"\nEmployee: {self.name}  |   Salary: ${self.salary:.2f}"
+        
+class Developer(Employee):
+    def __init__(self, name:str, salary: float, programm_lang: str, bonus: float =0.0):
+        super().__init__(name, salary)
+        self.lang = programm_lang
+        self.bonus = bonus
+
+    def get_annual_salary(self)-> float:
+        return super().get_annual_salary() +self.bonus
+
+    def write_code(self)->str:
+        return f"{self.name} writes code on {self.lang}"
+
+    def show_info(self):
+        return f"Developer: {self.name}  |  Language: {self.lang}  |   Salary: ${self.salary:.2f}"
+
+gen_emp = Employee("Alex", 2000)
+print(gen_emp.show_info())
+dev = Developer("Isko", 3000, "Python, JS", 500)
+print(dev.show_info())
+print(f"Annual salary with bonus: {dev.get_annual_salary():.2f}")
+
+# N96:
+list_of_users = ['Alex',"Anton",'Gordon','Juliya','Georgiy','Simon']
+with open('users.txt', 'w', encoding="utf-8") as f:
+    f.write("-----USERS-----\n")
+    for i, user in enumerate(list_of_users,start=1):
+        f.write(f"№{i}\t{user}\n")
+
+# N97:
+with open("users.txt",'r',encoding='utf-8')as f:
+    print(len(f.readlines()))
+
+# N98:
+def division():
+    a,b = int(input('enter number a: ')), int(input('enter number b: '))
+    try:
+        dv = a/b
+    except ZeroDivisionError as e:
+        print(f"An error occuerd: {e}")
+division()
+
+# N99:
+def print_product_List(lst:dict):
+    print("\n"+"="*50)
+    print("\t\tPRODUCT LIST")
+    print("=" * 50)
+
+    if not lst:
+        print("\t(The list is currently empty)")
+    else:
+        print(f"{'#'}   {'Product Name'} ")
+        print("-" * 50)
+        for i, (product, quant) in enumerate(lst.items(), 1):
+            print(f"{i}   {product}:  {quant}")
+            
+    print("=" * 50)
+
+def main():
+    Product_List = {}
+    while True:
+        print("\n=======NAVIGATION MENU=======")
+        print('1. Show products')
+        print('2. Add product')
+        print('3. Delete product')
+        print('0. Exit')
+
+        choice = input('\nselect an option (0-3): ').strip()
+        if choice == '1':
+            print_product_List(Product_List)
+        
+        elif choice == "2":
+            product_name = input("\nEnter the name of the new product: ").strip().title()
+            if not product_name:
+                print("Product name cannot be empty.")
+                continue
+
+            if product_name in Product_List:
+                Product_List[product_name] += 1
+                print(f"'{product_name}' is already on the list!")
+            else:
+                Product_List[product_name] = 1
+                print(f"'{product_name}' added successfully")
+
+
+        elif choice == "3":
+            if not Product_List:
+                print("\nList is empty. Nothing to delete.")
+                continue
+
+            product_name = input("\nEnter product name to remove: ").strip().title()
+            if product_name in Product_List:
+                del Product_List[product_name]
+                print(f"'{product_name}' has been removed from the list")
+            else:
+                print(f"'{product_name}' not found in the list")
+
+        elif choice == "0":
+            print("\nExiting program. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please enter a number from 0 to 3")
+
+
+if __name__ == "__main__":
+    main()
